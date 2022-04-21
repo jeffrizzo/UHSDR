@@ -213,11 +213,12 @@ typedef struct {
     int32_t value[IQ_TRANS_NUM];
 } iq_balance_data_t;
 
-#define KEYER_BUTTONS 3
+#define KEYER_BUTTONS 4
 #define KEYER_BUTTON_NONE -1
 #define KEYER_BUTTON_1 0
 #define KEYER_BUTTON_2 1
 #define KEYER_BUTTON_3 2
+#define KEYER_BUTTON_4 3
 #define KEYER_MACRO_LEN 200
 #define KEYER_CAP_LEN 6
 typedef struct {

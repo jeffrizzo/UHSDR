@@ -1147,15 +1147,14 @@ static void UiDriver_FButton_F3MemSplit()
 static inline void UiDriver_FButton_F4ActiveVFO()
 {
 	const char* cap;
-	if (ts.keyer_mode.active)
-	{
-		cap = " "; //FIXME This will be DEL
-	}
-	else
+	uint32_t color;
+
+	if (UiDriver_DisplayMacroKeyerLabel(KEYER_BUTTON_4, &cap, &color) == false)
 	{
 		cap = is_vfo_b() ? "VFO B" : "VFO A";
+        color = White;
 	}
-	UiDriver_DrawFButtonLabel(4, cap, White);
+	UiDriver_DrawFButtonLabel(4, cap, color);
 }
 
 static inline void UiDriver_FButton_F5Tune()
@@ -6645,6 +6644,11 @@ static void UiAction_PlayKeyerBtn3()
 	UiAction_PlayKeyerBtnN(KEYER_BUTTON_3);
 }
 
+static void UiAction_PlayKeyerBtn4()
+{
+	UiAction_PlayKeyerBtnN(KEYER_BUTTON_4);
+}
+
 static void UiAction_RecordKeyerBtnN(int8_t n)
 {
 	if (ts.keyer_mode.button_recording == KEYER_BUTTON_NONE
@@ -6677,6 +6681,11 @@ static void UiAction_RecordKeyerBtn2()
 static void UiAction_RecordKeyerBtn3()
 {
 	UiAction_RecordKeyerBtnN(KEYER_BUTTON_3);
+}
+
+static void UiAction_RecordKeyerBtn4()
+{
+	UiAction_RecordKeyerBtnN(KEYER_BUTTON_4);
 }
 
 static void UiAction_ToggleBufferedTXMode()
@@ -7015,7 +7024,7 @@ static const keyaction_descr_t keyactions_keyer[] =
 		{ BUTTON_F1_PRESSED, 	UiAction_PlayKeyerBtn1, 		UiAction_RecordKeyerBtn1 },
 		{ BUTTON_F2_PRESSED, 	UiAction_PlayKeyerBtn2, 		UiAction_RecordKeyerBtn2 },
 		{ BUTTON_F3_PRESSED, 	UiAction_PlayKeyerBtn3, 		UiAction_RecordKeyerBtn3 },
-		{ BUTTON_F4_PRESSED, 	KEYACTION_NOP, 		KEYACTION_NOP },
+		{ BUTTON_F4_PRESSED, 	UiAction_PlayKeyerBtn4, 		UiAction_RecordKeyerBtn4 },
 		{ BUTTON_F5_PRESSED, 	UiAction_ToggleTxRx,		UiAction_ToggleBufferedTXMode },
 };
 
